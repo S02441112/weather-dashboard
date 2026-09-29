@@ -1,12 +1,29 @@
 <!DOCTYPE html>
 <html lang="en">
-    <meta charset="UTF-8">
-    <title>Weather App</title>
 <head>
-    <link href="{{ url_for('static', path='/styles.css') }}" rel="stylesheet">
-</head>
-<body>
-    <h1>Weather (big if true)</h1>
-</body>
-</html lang="en">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
+    <title>Weather App</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+</head>
+
+<body>
+<!--    Show variable names-->
+<!--    <h2>{{ weather_data }}</h2>-->
+
+
+    <h1>7 Days of Weather</h1>
+    {% for item in weather_data %}
+        <h2>{{ item["date"] }}</h2>
+        <ul>
+            <li>Max {{ item["temperature_2m_max"] }}°F</li>
+            <li>Min {{ item["temperature_2m_min"] }}°F</li>
+            <li>Total precipitation {{ item["precipitation_sum"] }}″</li>
+            <li> Weather condition {{ item["weather_code"] }}</li>
+        </ul>
+    {% endfor %}
+
+</body>
+</html>

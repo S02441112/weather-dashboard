@@ -11,6 +11,8 @@ from retry_requests import retry
 
 from pathlib import Path
 
+import uvicorn
+
 
 BASE_DIR = Path(__file__).resolve().parent
 
@@ -19,28 +21,66 @@ app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
-@app.get("/")
-async def home(request: Request):
-    return templates.TemplateResponse(
-        request=request,
-        name="index.html",
-    )
+
+@app.get("/", response_class=HTMLResponse)
+async def read_root(request: Request):
+    weather_data = query_openmeteo()
+    # weather_code_json = {
+    #     "0": "Clear sky",
+    #     "1": "Mainly clear",
+    #     "2": "Partly cloudy",
+    #     "3": "Overcast",
+    #     "45": "Fog",
+    #     "48": "Depositing rime fog",
+    #     "51": "Light drizzle",
+    #     "53": "Moderate drizzle",
+    #     "55": "Dense drizzle",
+    #     "56": "Light freezing drizzle",
+    #     "57": "Dense freezing drizzle",
+    #     "61": "Slight rain",
+    #     "63": "Moderate rain",
+    #     "65": "Heavy rain",
+    #     "66": "Light freezing rain",
+    #     "67": "Heavy freezing rain",
+    #     "71": "Slight snowfall",
+    #     "73": "Moderate snowfall",
+    #     "75": "Heavy snowfall",
+    #     "77": "Snow grains",
+    #     "80": "Slight rain showers",
+    #     "81": "Moderate rain showers",
+    #     "82": "Violent rain showers",
+    #     "85": "Slight snow showers",
+    #     "86": "Heavy snow showers",
+    #     "95": "Thunderstorm",
+    #     "96": "Thunderstorm with slight hail",
+    #     "97": "Heavy thunderstorm",
+    #     "99": "Thunderstorm with heavy hail"
+    # }
+    return templates.TemplateResponse(request, "index.html", {"weather_data": weather_data})
+
 
 @app.get("/health")
 def read_health():
     health_message = {"status": "ok"}
     return health_message
 
+
 @app.get("/api/weather")
 def read_weather_api():
     weather_data = query_openmeteo()
-    return {"Weather for the next 7 days": weather_data}
+    return weather_data
+
 
 def main():
     print("Hello World")
 
+# TODO create function to  manipulate api data
+def manipulate_api_data():
+    print("complete manipulate_api_data")
+
+
 def query_openmeteo():
-    # Setup the Open-Meteo API client with cache and retry on error
+    # Set up the Open-Meteo API client with cache and retry on error
     cache_session = requests_cache.CachedSession('.cache', expire_after=3600)
     retry_session = retry(cache_session, retries=5, backoff_factor=0.2)
     openmeteo = openmeteo_requests.Client(session=retry_session)
@@ -49,8 +89,8 @@ def query_openmeteo():
     # The order of variables in hourly or daily is important to assign them correctly below
     url = "https://api.open-meteo.com/v1/forecast"
     params = {
-        "latitude": 38,
-        "longitude": 104,
+        "latitude": 38.835223497138934,
+        "longitude": -104.80464085663371,
         "daily": ["temperature_2m_max", "temperature_2m_min", "precipitation_sum", "weather_code"],
         "timezone": "America/Denver",
         "wind_speed_unit": "mph",
@@ -60,6 +100,7 @@ def query_openmeteo():
     responses = openmeteo.weather_api(url, params=params)
 
     # Process first location. Add a for-loop for multiple locations or weather models
+    # TODO return this instead of printing
     response = responses[0]
     print(f"Coordinates: {response.Latitude()}°N {response.Longitude()}°E")
     print(f"Elevation: {response.Elevation()} m asl")
@@ -83,7 +124,7 @@ def query_openmeteo():
     }
 
     daily_data["temperature_2m_max"] = daily_temperature_2m_max.round(1)
-    daily_data["temperature_2m_min"] = daily_temperature_2m_min
+    daily_data["temperature_2m_min"] = daily_temperature_2m_min.round(1)
     daily_data["precipitation_sum"] = daily_precipitation_sum
     daily_data["weather_code"] = daily_weather_code
 
@@ -91,6 +132,11 @@ def query_openmeteo():
 
     return daily_dataframe.to_dict(orient="records")
 
-
-#if __name__ == "__main__":
-#    uvicorn.run("main:app", host="0.0.0.0", port=8000, log_level="info")
+# Use below to debug locally
+if __name__ == "__main__":
+    uvicorn.run(
+        "main:app",
+        host="127.0.0.1",
+        port=8000,
+        reload=True  # Optional: enables auto-reload during debugging
+    )

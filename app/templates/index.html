@@ -16,10 +16,10 @@
 
     <h1>7 Days of Weather</h1>
     {% for item in weather_data %}
-        <h2>{{ item["date"] }}</h2>
+        <h2>{{ item["day"] }}</h2>
         <ul>
-            <li>Max {{ item["temperature_2m_max"] }}°F</li>
-            <li>Min {{ item["temperature_2m_min"] }}°F</li>
+            <li>Max {{ item["max_temp"] }}°F</li>
+            <li>Min {{ item["min_temp"] }}°F</li>
             <li>Total precipitation {{ item["precipitation_sum"] }}″</li>
             <li> Weather condition {{ item["weather_code"] }}</li>
         </ul>

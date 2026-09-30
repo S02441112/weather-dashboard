@@ -1,3 +1,5 @@
+from email.policy import default
+
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -24,38 +26,8 @@ templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
-    weather_data = query_openmeteo()
-    # weather_code_json = {
-    #     "0": "Clear sky",
-    #     "1": "Mainly clear",
-    #     "2": "Partly cloudy",
-    #     "3": "Overcast",
-    #     "45": "Fog",
-    #     "48": "Depositing rime fog",
-    #     "51": "Light drizzle",
-    #     "53": "Moderate drizzle",
-    #     "55": "Dense drizzle",
-    #     "56": "Light freezing drizzle",
-    #     "57": "Dense freezing drizzle",
-    #     "61": "Slight rain",
-    #     "63": "Moderate rain",
-    #     "65": "Heavy rain",
-    #     "66": "Light freezing rain",
-    #     "67": "Heavy freezing rain",
-    #     "71": "Slight snowfall",
-    #     "73": "Moderate snowfall",
-    #     "75": "Heavy snowfall",
-    #     "77": "Snow grains",
-    #     "80": "Slight rain showers",
-    #     "81": "Moderate rain showers",
-    #     "82": "Violent rain showers",
-    #     "85": "Slight snow showers",
-    #     "86": "Heavy snow showers",
-    #     "95": "Thunderstorm",
-    #     "96": "Thunderstorm with slight hail",
-    #     "97": "Heavy thunderstorm",
-    #     "99": "Thunderstorm with heavy hail"
-    # }
+    api_weather_data = query_openmeteo()
+    weather_data = format_weather_data(api_weather_data)
     return templates.TemplateResponse(request, "index.html", {"weather_data": weather_data})
 
 
@@ -73,10 +45,6 @@ def read_weather_api():
 
 def main():
     print("Hello World")
-
-# TODO create function to  manipulate api data
-def manipulate_api_data():
-    print("complete manipulate_api_data")
 
 
 def query_openmeteo():
@@ -123,14 +91,68 @@ def query_openmeteo():
         ).tz_convert(response.Timezone().decode())
     }
 
-    daily_data["temperature_2m_max"] = daily_temperature_2m_max.round(1)
-    daily_data["temperature_2m_min"] = daily_temperature_2m_min.round(1)
+    daily_data["temperature_2m_max"] = daily_temperature_2m_max
+    daily_data["temperature_2m_min"] = daily_temperature_2m_min
     daily_data["precipitation_sum"] = daily_precipitation_sum
     daily_data["weather_code"] = daily_weather_code
 
     daily_dataframe = pd.DataFrame(data=daily_data)
 
     return daily_dataframe.to_dict(orient="records")
+
+
+def format_weather_data(api_weather_data):
+
+    weather_code_json = {
+        0: "Clear sky",
+        1: "Mainly clear",
+        2: "Partly cloudy",
+        3: "Overcast",
+        45: "Fog",
+        48: "Depositing rime fog",
+        51: "Light drizzle",
+        53: "Moderate drizzle",
+        55: "Dense drizzle",
+        56: "Light freezing drizzle",
+        57: "Dense freezing drizzle",
+        61: "Slight rain",
+        63: "Moderate rain",
+        65: "Heavy rain",
+        66: "Light freezing rain",
+        67: "Heavy freezing rain",
+        71: "Slight snowfall",
+        73: "Moderate snowfall",
+        75: "Heavy snowfall",
+        77: "Snow grains",
+        80: "Slight rain showers",
+        81: "Moderate rain showers",
+        82: "Violent rain showers",
+        85: "Slight snow showers",
+        86: "Heavy snow showers",
+        95: "Thunderstorm",
+        96: "Thunderstorm with slight hail",
+        97: "Heavy thunderstorm",
+        99: "Thunderstorm with heavy hail"
+    }
+
+    formatted_weather_data = []
+
+    for day in api_weather_data:
+        formatted_data = {
+            "day": day["date"],
+            # round temp max and min to nearest whole
+            "max_temp": round(day["temperature_2m_max"]),
+            "min_temp": round(day["temperature_2m_min"]),
+            # round precipitation sum to 2 decimal places
+            "precipitation_sum": round(day["precipitation_sum"], 2),
+            # assign weather codes dict keys to their values and use unknown as safety net
+            "weather_code": weather_code_json.get(int(day["weather_code"]), "Unknown"),
+        }
+
+        formatted_weather_data.append(formatted_data)
+
+    return formatted_weather_data
+
 
 # Use below to debug locally
 if __name__ == "__main__":

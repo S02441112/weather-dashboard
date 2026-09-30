@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Weather App</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', path='styles.css') }}">
+</head>
+
+<body>
+<!--    Show variable names-->
+<!--    <h2>{{ weather_data }}</h2>-->
+
+
+    <h1>7 Days of Weather</h1>
+    {% for item in weather_data %}
+        <h2>{{ item["day"] }}</h2>
+        <ul>
+            <li>Max {{ item["max_temp"] }}°F</li>
+            <li>Min {{ item["min_temp"] }}°F</li>
+            <li>Total precipitation {{ item["precipitation_sum"] }}″</li>
+            <li> Weather condition {{ item["weather_code"] }}</li>
+        </ul>
+    {% endfor %}
+
+</body>
+</html>

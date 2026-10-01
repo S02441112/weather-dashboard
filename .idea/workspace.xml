@@ -6,7 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="49a5dfce-52a7-47a4-a018-d6632058ba3f" name="Changes" comment="API info as JSON. Html and css.">
       <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/FastAPI.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +133,7 @@
       <workItem from="1790278992079" duration="4077000" />
       <workItem from="1790638267905" duration="11199000" />
       <workItem from="1790782750968" duration="9386000" />
-      <workItem from="1790868637468" duration="1527000" />
+      <workItem from="1790868637468" duration="1847000" />
     </task>
     <task id="LOCAL-00001" summary="API info as JSON. Html and css.">
       <option name="closed" value="true" />

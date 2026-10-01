@@ -1,5 +1,3 @@
-from email.policy import default
-
 from fastapi import FastAPI, Request
 from fastapi.responses import HTMLResponse
 from fastapi.staticfiles import StaticFiles
@@ -24,6 +22,7 @@ app.mount("/static", StaticFiles(directory=BASE_DIR / "static"), name="static")
 templates = Jinja2Templates(directory=BASE_DIR / "templates")
 
 
+# request root directory and display formatted weather information from weather api
 @app.get("/", response_class=HTMLResponse)
 async def read_root(request: Request):
     api_weather_data = query_openmeteo()
@@ -31,20 +30,18 @@ async def read_root(request: Request):
     return templates.TemplateResponse(request, "index.html", {"weather_data": weather_data})
 
 
+# health page to determine if services are up
 @app.get("/health")
 def read_health():
     health_message = {"status": "ok"}
     return health_message
 
 
+# display raw json from openmeteo
 @app.get("/api/weather")
 def read_weather_api():
     weather_data = query_openmeteo()
     return weather_data
-
-
-def main():
-    print("Hello World")
 
 
 def query_openmeteo():

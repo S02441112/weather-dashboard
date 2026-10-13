@@ -15,11 +15,6 @@
 
 
     <h1>7 Days of Weather</h1>
-    <form method="post" action="/">
-        <label for="city-input">City Search </label><input type="text" name="city-input" id="city-input" placeholder="Enter city name">
-        <button type="submit">Search</button>
-    </form>
-
     {% for item in weather_data %}
         <h2>{{ item["day"] }}</h2>
         <ul>

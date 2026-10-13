@@ -4,15 +4,8 @@ import pandas as pd
 import requests_cache
 from retry_requests import retry
 
-import requests
 
-DEFAULT_LAT = 38.835223497138934
-DEFAULT_LON = -104.80464085663371
-
-def query_openmeteo(latitude: float | None = None, longitude: float | None = None):
-    lat = DEFAULT_LAT if latitude is None else latitude
-    lon = DEFAULT_LON if longitude is None else longitude
-
+def query_openmeteo():
     # Set up the Open-Meteo API client with cache and retry on error
     cache_session = requests_cache.CachedSession('.cache', expire_after=3600)
     retry_session = retry(cache_session, retries=5, backoff_factor=0.2)
@@ -21,10 +14,9 @@ def query_openmeteo(latitude: float | None = None, longitude: float | None = Non
     # Make sure all required weather variables are listed here
     # The order of variables in hourly or daily is important to assign them correctly below
     url = "https://api.open-meteo.com/v1/forecast"
-
     params = {
-        "latitude": lat,
-        "longitude": lon,
+        "latitude": 38.835223497138934,
+        "longitude": -104.80464085663371,
         "daily": ["temperature_2m_max", "temperature_2m_min", "precipitation_sum", "weather_code"],
         "timezone": "America/Denver",
         "wind_speed_unit": "mph",
@@ -118,30 +110,3 @@ def format_weather_data(api_weather_data):
         formatted_weather_data.append(formatted_data)
 
     return formatted_weather_data
-
-# Input: city name str, Output: dict with latitude, longitude, name, country
-def geocode_location(city):
-    url = "https://geocoding-api.open-meteo.com/v1/search"
-    params = {"name": city, "count": 1, "language": "en", "format": "json"}
-    request = requests.get(url, params=params)
-    data = request.json() # Converts JSON data into Python dict
-
-    if not data.get("results"):
-        return None
-
-    result = data["results"][0]
-    return {
-            "latitude": result["latitude"],
-            "longitude": result["longitude"],
-            "name": result["name"],
-            "country": result["country"]
-    }
-
-def geocode_search():
-    print("TODO: Implement geocode_search function to search for place names and return coordinates")
-
-def validate_place(place_name):
-    if place_name is None or not isinstance(place_name, str) or place_name.strip() == "":
-        return False
-    print("TODO: Implement validate_place function to check if place name is valid")
-    return True

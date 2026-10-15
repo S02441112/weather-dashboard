@@ -9,6 +9,7 @@ import requests
 DEFAULT_LAT = 38.835223497138934
 DEFAULT_LON = -104.80464085663371
 
+# Input: latitude and longitude as floats, Output: dict with daily weather data
 def query_openmeteo(latitude: float | None = None, longitude: float | None = None):
     lat = DEFAULT_LAT if latitude is None else latitude
     lon = DEFAULT_LON if longitude is None else longitude
@@ -127,6 +128,8 @@ def geocode_location(city):
     data = request.json() # Converts JSON data into Python dict
 
     if not data.get("results"):
+        # return "no city cityname found" or None if no results found
+
         return None
 
     result = data["results"][0]
@@ -137,11 +140,8 @@ def geocode_location(city):
             "country": result["country"]
     }
 
-def geocode_search():
-    print("TODO: Implement geocode_search function to search for place names and return coordinates")
 
 def validate_place(place_name):
     if place_name is None or not isinstance(place_name, str) or place_name.strip() == "":
         return False
-    print("TODO: Implement validate_place function to check if place name is valid")
     return True

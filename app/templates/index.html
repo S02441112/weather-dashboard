@@ -20,6 +20,15 @@
         <button type="submit">Search</button>
     </form>
 
+        {% if warning_message %}
+            <p style="color: red;">{{ warning_message }}</p>
+        {% endif %}
+
+        {% if message %}
+            <p>{{ message }}</p>
+        {% endif %}
+
+
     {% for item in weather_data %}
         <h2>{{ item["day"] }}</h2>
         <ul>

@@ -1,7 +1,7 @@
 # API Routes
 # health page to determine if services are up
 from fastapi import APIRouter
-from app.services.weather import query_openmeteo, geocode_search
+from app.services.weather import query_openmeteo, geocode_location, format_weather_data
 
 router = APIRouter()
 
@@ -18,9 +18,15 @@ def read_weather_api():
     return weather_data
 
 
-router.get("/api/cities")
+@router.get("/api/weather/formatted")
+def read_weather_formatted():
+    weather_data = query_openmeteo()
+    return format_weather_data(weather_data)
+
+
+@router.get("/api/cities/{q}")
 async def api_cities(q: str):
     if not q or len(q) < 2:
         return []
-    results = geocode_search(q)
+    results = geocode_location(q)
     return results

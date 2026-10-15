@@ -7,14 +7,9 @@
     <option name="selectedModelId" value="auto" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49a5dfce-52a7-47a4-a018-d6632058ba3f" name="Changes" comment="refactor: simplify workspace.xml structure and update git-widget-placeholder">
-      <change afterPath="$PROJECT_DIR$/app/tests/test_services.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.cache.sqlite" beforeDir="false" afterPath="$PROJECT_DIR$/.cache.sqlite" afterDir="false" />
+    <list default="true" id="49a5dfce-52a7-47a4-a018-d6632058ba3f" name="Changes" comment="feat: enhance city search with user feedback and validation messages with some function tests">
+      <change afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/pages.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/pages.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/routes/weather.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/routes/weather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/services/weather.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/services/weather.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/app/templates/index.html" beforeDir="false" afterPath="$PROJECT_DIR$/app/templates/index.html" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -219,7 +214,15 @@
       <option name="project" value="LOCAL" />
       <updated>1791915336597</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="feat: enhance city search with user feedback and validation messages with some function tests">
+      <option name="closed" value="true" />
+      <created>1792093772216</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1792093772216</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -240,7 +243,8 @@
     <MESSAGE value="API info as JSON. Html and css." />
     <MESSAGE value="refactor: restructure application by separating routes into dedicated modules" />
     <MESSAGE value="refactor: simplify workspace.xml structure and update git-widget-placeholder" />
-    <option name="LAST_COMMIT_MESSAGE" value="refactor: simplify workspace.xml structure and update git-widget-placeholder" />
+    <MESSAGE value="feat: enhance city search with user feedback and validation messages with some function tests" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: enhance city search with user feedback and validation messages with some function tests" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

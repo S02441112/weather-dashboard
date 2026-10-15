@@ -7,10 +7,8 @@
     <option name="selectedModelId" value="auto" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49a5dfce-52a7-47a4-a018-d6632058ba3f" name="Changes" comment="feat: enhance city search with user feedback and validation messages with some function tests">
-      <change afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
+    <list default="true" id="49a5dfce-52a7-47a4-a018-d6632058ba3f" name="Changes" comment="feat: add CI workflow for testing and coverage reporting">
+      <change beforePath="$PROJECT_DIR$/src/weather_dashboard/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/app/__init__.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -222,7 +220,15 @@
       <option name="project" value="LOCAL" />
       <updated>1792093772216</updated>
     </task>
-    <option name="localTasksCounter" value="5" />
+    <task id="LOCAL-00005" summary="feat: add CI workflow for testing and coverage reporting">
+      <option name="closed" value="true" />
+      <created>1792095084904</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1792095084904</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -244,7 +250,8 @@
     <MESSAGE value="refactor: restructure application by separating routes into dedicated modules" />
     <MESSAGE value="refactor: simplify workspace.xml structure and update git-widget-placeholder" />
     <MESSAGE value="feat: enhance city search with user feedback and validation messages with some function tests" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: enhance city search with user feedback and validation messages with some function tests" />
+    <MESSAGE value="feat: add CI workflow for testing and coverage reporting" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: add CI workflow for testing and coverage reporting" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>

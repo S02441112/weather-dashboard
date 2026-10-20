@@ -7,9 +7,8 @@
     <option name="selectedModelId" value="auto" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="49a5dfce-52a7-47a4-a018-d6632058ba3f" name="Changes" comment="feat: enhance CI workflow with increased coverage threshold and add mock tests for weather data queries">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pyproject.toml" beforeDir="false" afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
+    <list default="true" id="49a5dfce-52a7-47a4-a018-d6632058ba3f" name="Changes" comment="feat: update project version and modify entry point for weather dashboard">
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -254,7 +253,15 @@
       <option name="project" value="LOCAL" />
       <updated>1792511690511</updated>
     </task>
-    <option name="localTasksCounter" value="9" />
+    <task id="LOCAL-00009" summary="feat: update project version and modify entry point for weather dashboard">
+      <option name="closed" value="true" />
+      <created>1792512212461</created>
+      <option name="number" value="00009" />
+      <option name="presentableId" value="LOCAL-00009" />
+      <option name="project" value="LOCAL" />
+      <updated>1792512212461</updated>
+    </task>
+    <option name="localTasksCounter" value="10" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -280,7 +287,8 @@
     <MESSAGE value="refactor: rename weather_dashboard init file and update workspace.xml structure" />
     <MESSAGE value="feat: update CI workflow to specify test directory for coverage reporting" />
     <MESSAGE value="feat: enhance CI workflow with increased coverage threshold and add mock tests for weather data queries" />
-    <option name="LAST_COMMIT_MESSAGE" value="feat: enhance CI workflow with increased coverage threshold and add mock tests for weather data queries" />
+    <MESSAGE value="feat: update project version and modify entry point for weather dashboard" />
+    <option name="LAST_COMMIT_MESSAGE" value="feat: update project version and modify entry point for weather dashboard" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
     <SUITE FILE_PATH="coverage/weather_dashboard$main.coverage" NAME="main Coverage Results" MODIFIED="1790644797311" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/app" />

@@ -49,11 +49,23 @@ def query_openmeteo(latitude: float | None = None, longitude: float | None = Non
     daily_precipitation_sum = daily.Variables(2).ValuesAsNumpy()
     daily_weather_code = daily.Variables(3).ValuesAsNumpy()
 
+    # daily_data = {
+    #     "date": pd.date_range(
+    #         start=pd.to_datetime(daily.Time(), unit="s", utc=True),
+    #         end=pd.to_datetime(daily.TimeEnd(), unit="s", utc=True),
+    #         freq=pd.Timedelta(seconds=daily.Interval()),
+    #         inclusive="left"
+    #     ).tz_convert(response.Timezone().decode())
+    # }
+
+    time_values = pd.to_datetime(daily.Time(), unit="s", utc=True)
+    time_end_values = pd.to_datetime(daily.TimeEnd(), unit="s", utc=True)
+
     daily_data = {
         "date": pd.date_range(
-            start=pd.to_datetime(daily.Time(), unit="s", utc=True),
-            end=pd.to_datetime(daily.TimeEnd(), unit="s", utc=True),
-            freq=pd.Timedelta(seconds=daily.Interval()),
+            start=time_values[0],
+            end=time_end_values[-1],
+            freq=pd.Timedelta(seconds=int(daily.Interval())),
             inclusive="left"
         ).tz_convert(response.Timezone().decode())
     }

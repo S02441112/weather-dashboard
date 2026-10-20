@@ -29,7 +29,7 @@ jobs:
 
       - name: Enforce minimum coverage fail if below threshold
         run: |
-          coverage report --fail-under=40
+          coverage report --fail-under=80
 
       - name: Upload coverage report
         uses: actions/upload-artifact@v4

@@ -1,7 +1,7 @@
 [project]
 name = "weather-dashboard"
-version = "0.1.0"
-description = "Simply shows the weather"
+version = "0.2.0"
+description = "Simply shows the weather of a user queried city."
 readme = "README.md"
 authors = [
     { name = "S02441112", email = "tylerma2102@gmail.com" }
@@ -13,7 +13,7 @@ dependencies = [
 ]
 
 [project.scripts]
-weather-dashboard = "weather_dashboard:main"
+weather-dashboard = "app.main:app"
 
 [build-system]
 requires = ["uv_build>=0.12.12,<0.13.0"]
